@@ -1,0 +1,75 @@
+cabal-version:      3.0
+name:               advent2025
+version:            0.1.0.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Pedro Vasconcelos
+maintainer:         pbvascon@fc.up.pt
+category:           Game
+build-type:         Simple
+
+
+executable aoc01
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0, QuickCheck
+    hs-source-dirs:   aoc01
+    default-language: Haskell2010
+
+executable aoc02
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0
+    hs-source-dirs:   aoc02
+    default-language: Haskell2010
+    
+executable aoc03
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0
+    hs-source-dirs:   aoc03
+    default-language: Haskell2010
+    
+executable aoc04
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0, containers
+    hs-source-dirs:   aoc04
+    default-language: Haskell2010
+
+executable aoc05
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0
+    hs-source-dirs:   aoc05
+    default-language: Haskell2010
+            
+executable aoc06
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0
+    hs-source-dirs:   aoc06
+    default-language: Haskell2010
+            
+executable aoc07
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0, containers
+    hs-source-dirs:   aoc07
+    default-language: Haskell2010
+            
+            
+executable aoc08
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0, containers
+    hs-source-dirs:   aoc08
+    default-language: Haskell2010
+            
+            
+executable aoc09
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0, containers
+    hs-source-dirs:   aoc09
+    default-language: Haskell2010
+            
+            
+executable aoc10
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.3.0, process
+    hs-source-dirs:   aoc10
+    default-language: Haskell2010
+            
+            
