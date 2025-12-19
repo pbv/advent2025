@@ -7,15 +7,17 @@ module Main where
 import Data.List
 import Data.Bits(xor)
 import System.Process (system)
+import Control.Exception
+
+import ILP 
 
 main :: IO ()
 main = do
   input <- readInput <$> getContents
-  print input
   putStrLn "Part 1"
   print (part1 input)
   putStrLn "Part 2"
-  part2 input
+  print (part2 input)
 
 
 data Machine = Machine { target :: [Int]
@@ -80,9 +82,22 @@ solution1 Machine{..}
         [] -> error "unsolved machine"
         sols -> minimum sols
 
--- Part 2 (using GLPK constraint solver)
-part2 :: Input -> IO ()
-part2 list = do
+-- Part 2, using custom linear solver (module ILP)
+part2 :: Input -> Int
+part2 list = sum (map best list)
+
+best :: Machine -> Int
+best m = minimum $ map sum $ solve $ genMatrix m
+
+
+genMatrix :: Machine -> Matrix
+genMatrix Machine{..}
+  = transpose (buttons ++ [jolts])
+
+
+-- Part 2 alternative (using GLPK constraint solver)
+part2alt :: Input -> IO ()
+part2alt list = do
   system "rm machine*.lp output*.txt"
   sequence_ [runSolver i m | (i, m) <- zip [1..] list]
   system "grep Objective output*.txt | cut -d ' ' -f 5 | awk '{s+=$1}END{print s}'"
@@ -96,8 +111,7 @@ runSolver i m = do
   writeFile path (genLP m)
   system ("glpsol --lp " ++ path ++ " -o " ++ output)
   return ()
-  
-              
+             
 
 -- generate an LP problem for solving Part 2 for a single machine
 genLP :: Machine -> String
@@ -116,3 +130,5 @@ genLP Machine{..}
                         zipWith (\k v -> show k ++ " "++v) row vars)
                        ++ " = "
                        ++ show (last row)
+
+
